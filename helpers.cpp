@@ -34,10 +34,29 @@ using namespace std;
 */
 vector< vector<float> > normalize(vector< vector <float> > grid) {
 	
-	vector< vector<float> > newGrid;
+	// construct the newGrid as same size as grid and populate with zeros
+	vector< vector<float> > newGrid (grid.size(), vector<float>(grid[0].size(), 0.0));
 
 	// todo - your code here
+	// instantiate a normalization factor
+	float grid_total = 0.0;
 
+	// sum all the grid cells into the normalization factor
+	for (int row = 0; row < grid.size(); row++) {
+		for (int cell = 0; cell < grid[0].size(); cell++) {
+			grid_total += grid[row][cell];
+		}
+	}
+
+	// populate the newGrid with the normalized values from grid
+	// by dividing the grid cells by the grid_total:
+	for (int row = 0; row < grid.size(); row++) {
+		for (int cell = 0; cell < grid.size(); cell++) {
+			newGrid[row][cell] = grid[row][cell] / grid_total;
+		}
+	}
+
+	// return the normalized grid structure
 	return newGrid;
 }
 
