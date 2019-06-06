@@ -21,8 +21,6 @@
 using namespace std;
 
 /**
-	TODO - implement this function
-
     Normalizes a grid of numbers. 
 
     @param grid - a two dimensional grid (vector of vectors of floats)
@@ -34,10 +32,9 @@ using namespace std;
 */
 vector< vector<float> > normalize(vector< vector <float> > grid) {
 	
-	// construct the newGrid as same size as grid and populate with zeros
+	// construct newGrid as same size as grid and populate with zeros
 	vector< vector<float> > newGrid (grid.size(), vector<float>(grid[0].size(), 0.0));
 
-	// todo - your code here
 	// instantiate a normalization factor
 	float grid_total = 0.0;
 
@@ -61,8 +58,6 @@ vector< vector<float> > normalize(vector< vector <float> > grid) {
 }
 
 /**
-	TODO - implement this function.
-
     Blurs (and normalizes) a grid of probabilities by spreading 
     probability from each cell over a 3x3 "window" of cells. This 
     function assumes a cyclic world where probability "spills 
@@ -95,10 +90,54 @@ vector< vector<float> > normalize(vector< vector <float> > grid) {
 */
 vector < vector <float> > blur(vector < vector < float> > grid, float blurring) {
 
-	vector < vector <float> > newGrid;
-	
-	// your code here
+	// initialize a height and width variables for refactoring
+	int height = grid.size();
+	int width = grid[0].size();
 
+	// construct newGrid as same size as grid and populate with zeros
+	vector< vector<float> > newGrid (grid.size(), vector<float>(grid[0].size(), 0.0));
+
+	// create a 3x3 blurring window (2d vector) based on the blurring 
+	// parameters and normalize the window values per each position,
+	// then populate the blurring window (vector<vector>) with 
+	// these values:
+	vector < vector <float> > window;
+	float center_prob = 1.0 - blurring;
+	float corner_prob = blurring / 12.0;
+	float adjacent_prob = blurring / 6.0;
+	
+	// fill the blurring 2d vector
+	window.push_back(vector<float> {corner_prob, adjacent_prob, corner_prob});
+	window.push_back(vector<float> {adjacent_prob, center_prob, adjacent_prob});
+	window.push_back(vector<float> {corner_prob, adjacent_prob, corner_prob});
+	
+	// construct variables for applying the blur effect
+	float grid_value;
+	float mult;
+	int new_i;
+	int new_j;
+
+	// loop through the original grid and get each value
+	for (int i = 0; i < height; i++) {
+		for (int j = 0; i < width; j++) {
+			grid_value = grid[i][j];
+			
+			// loop through the blur window value
+			for (int dx = -1; dx < 2; dx++) {
+				for (int dy = -1; dy < 2; dy++) {
+					// get the bluring factor
+					mult = window[dx + 1][dy + 1];
+					new_i = (i + dy) % height;
+					new_j = (j + dx) % width;
+
+					// assign the newGrid values factoring in blur & orig grid
+					newGrid[new_i][new_j] += (mult * grid_value);
+				}
+			}
+		}
+	}
+
+	// normalize the newGrid structure values and return structure
 	return normalize(newGrid);
 }
 
