@@ -6,9 +6,9 @@
 	correctly implementing the "initialize_beliefs", 
 	"sense", and "move" functions.
 
-	This file is incomplete! Your job is to make these
-	functions work. Feel free to look at localizer.py 
-	for working implementations which are written in python.
+	Programmer:		Daniel Rines
+    Date Created:	2019.06.06
+    Date Revised:	2019.06.07
 */
 
 #include "localizer.h"
@@ -123,8 +123,6 @@ vector< vector <float> > move(int dy, int dx,
 
 
 /**
-	TODO - implement this function 
-    
     Implements robot sensing by updating beliefs based on the 
     color of a sensor measurement 
 

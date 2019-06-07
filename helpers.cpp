@@ -4,10 +4,9 @@
 	Purpose: helper functions which are useful when
 	implementing a 2-dimensional histogram filter.
 
-	This file is incomplete! Your job is to make the
-	normalize and blur functions work. Feel free to 
-	look at helper.py for working implementations 
-	which are written in python.
+	Programmer:		Daniel Rines
+    Date Created:	2019.06.06
+    Date Revised:	2019.06.07
 */
 
 #include <vector>
