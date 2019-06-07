@@ -127,8 +127,8 @@ vector < vector <float> > blur(vector < vector < float> > grid, float blurring) 
 				for (int dy = -1; dy < 2; dy++) {
 					// get the bluring factor
 					mult = window[dx + 1][dy + 1];
-					new_i = (i + dy) % height;
-					new_j = (j + dx) % width;
+					new_i = ((i + dy) % height + height) % height;
+					new_j = ((j + dx) % width + width) % width;
 
 					// assign the newGrid values factoring in blur & orig grid
 					newGrid[new_i][new_j] += (mult * grid_value);

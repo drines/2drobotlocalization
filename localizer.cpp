@@ -107,9 +107,11 @@ vector< vector <float> > move(int dy, int dx,
 	// loop thru the beliefs matrix and shift cell values based on dy, dx
 	for (int i = 0; i < height; i++) {
 		for (int j = 0; j < width; j++) {
+
 			// calculate the frame shift for newGrid
-			new_i = (i + dy) % width;
-			new_j = (j + dx) % height;
+			new_i = ((i + dy) % height + height) % height;
+			new_j = ((j + dx) % width + width) % width;
+
 			// store the value from beliefs into the correct newGrid pos.
 			newGrid[new_i][new_j] = beliefs[i][j];
 		}
