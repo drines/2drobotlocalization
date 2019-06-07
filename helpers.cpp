@@ -95,7 +95,7 @@ vector < vector <float> > blur(vector < vector < float> > grid, float blurring) 
 	int width = grid[0].size();
 
 	// construct newGrid as same size as grid and populate with zeros
-	vector< vector<float> > newGrid (grid.size(), vector<float>(grid[0].size(), 0.0));
+	vector< vector<float> > newGrid (height, vector<float> (width, 0.0));
 
 	// create a 3x3 blurring window (2d vector) based on the blurring 
 	// parameters and normalize the window values per each position,
@@ -119,12 +119,13 @@ vector < vector <float> > blur(vector < vector < float> > grid, float blurring) 
 
 	// loop through the original grid and get each value
 	for (int i = 0; i < height; i++) {
-		for (int j = 0; i < width; j++) {
+		for (int j = 0; j < width; j++) {
 			grid_value = grid[i][j];
 			
 			// loop through the blur window value
 			for (int dx = -1; dx < 2; dx++) {
 				for (int dy = -1; dy < 2; dy++) {
+
 					// get the bluring factor
 					mult = window[dx + 1][dy + 1];
 					new_i = ((i + dy) % height + height) % height;

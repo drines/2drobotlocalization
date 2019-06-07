@@ -176,12 +176,13 @@ vector< vector <float> > sense(char color,
 	// loop thru the grid and beliefs matrices to establish the new beliefs
 	// construct some local variables for comparing the hit truth in sense 
 	int hit = 0;
+
 	// start with the first row and loop through the cols:
 	for (int i = 0; i < height; i++) {
 		for (int j = 0; j < width; j++) {
 
 			// check if we have a color match (hit)
-			hit = (color == grid[i][j]) ? 0 : 1;
+			hit = (color == grid[i][j]) ? true : false;
 
 			// assign the newGrid (beliefs) values
 			newGrid[i][j] = beliefs[i][j] * (hit * p_hit + (1 - hit) * p_miss);
